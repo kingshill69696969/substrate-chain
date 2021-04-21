@@ -246,11 +246,11 @@ impl pallet_balances::Config for Runtime {
 }
 
 parameter_types! {
-	pub const AssetDeposit: Balance = 100 * DOLLARS;
-	pub const ApprovalDeposit: Balance = 1 * DOLLARS;
+	pub const AssetDeposit: Balance = 1;
+	pub const ApprovalDeposit: Balance = 1;
 	pub const StringLimit: u32 = 50;
-	pub const MetadataDepositBase: Balance = 10 * DOLLARS;
-	pub const MetadataDepositPerByte: Balance = 1 * DOLLARS;
+	pub const MetadataDepositBase: Balance = 1;
+	pub const MetadataDepositPerByte: Balance = 1;
 }
 
 impl pallet_assets::Config for Runtime {
@@ -258,14 +258,16 @@ impl pallet_assets::Config for Runtime {
 	type Balance = u64;
 	type AssetId = u32;
 	type Currency = Balances;
-	type ForceOrigin = EnsureRoot<AccountId>;
-	type AssetDeposit = AssetDeposit;
+	type ForceOrigin = frame_system::EnsureRoot<AccountId>;
+	// type AssetDeposit = AssetDeposit;
 	type MetadataDepositBase = MetadataDepositBase;
 	type MetadataDepositPerByte = MetadataDepositPerByte;
-	type ApprovalDeposit = ApprovalDeposit;
+	// type ApprovalDeposit = ApprovalDeposit;
 	type StringLimit = StringLimit;
-	type Freezer = ();
-	type Extra = ();
+	// type Freezer = ();
+	// type Extra = ();
+	type AssetDepositBase = AssetDeposit;
+	type AssetDepositPerZombie = AssetDeposit;
 	type WeightInfo = pallet_assets::weights::SubstrateWeight<Runtime>;
 }
 
@@ -287,12 +289,14 @@ impl pallet_sudo::Config for Runtime {
 
 parameter_types! {
 	pub const VaultModuleId: ModuleId = ModuleId(*b"rp/vault");
+	pub const LiquidatorModuleId: ModuleId = ModuleId(*b"rp/liqtr");
 }
 
 /// Configure the template pallet in pallets/template.
 impl pallet_vault::Config for Runtime {
 	type Event = Event;
 	type ModuleId = VaultModuleId;
+	type LiquidatorModuleId = LiquidatorModuleId;
 }
 
 // Create the runtime by composing the FRAME pallets that were previously configured.
