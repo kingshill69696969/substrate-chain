@@ -28,14 +28,14 @@ use sp_version::NativeVersion;
 pub use sp_runtime::BuildStorage;
 pub use pallet_timestamp::Call as TimestampCall;
 pub use pallet_balances::Call as BalancesCall;
-pub use sp_runtime::{Permill, Perbill, ModuleId};
+pub use sp_runtime::{Permill, Perbill};
 pub use frame_support::{
 	construct_runtime, parameter_types, StorageValue,
 	traits::{KeyOwnerProofSystem, Randomness},
 	weights::{
 		Weight, IdentityFee,
 		constants::{BlockExecutionWeight, ExtrinsicBaseWeight, RocksDbWeight, WEIGHT_PER_SECOND},
-	},
+	}, PalletId
 };
 use pallet_transaction_payment::CurrencyAdapter;
 
@@ -288,15 +288,18 @@ impl pallet_sudo::Config for Runtime {
 }
 
 parameter_types! {
-	pub const VaultModuleId: ModuleId = ModuleId(*b"rp/vault");
-	pub const LiquidatorModuleId: ModuleId = ModuleId(*b"rp/liqtr");
+	pub const VaultPalletId: PalletId = PalletId(*b"rp/vault");
+	pub const LiquidatorPalletId: PalletId = PalletId(*b"rp/liqtr");
 }
 
 /// Configure the template pallet in pallets/template.
 impl pallet_vault::Config for Runtime {
 	type Event = Event;
-	type ModuleId = VaultModuleId;
-	type LiquidatorModuleId = LiquidatorModuleId;
+	type Balance = u64;
+	type AssetId = u32;
+	type Currencies = Assets;
+	type PalletId = VaultPalletId;
+	type LiquidatorPalletId = LiquidatorPalletId;
 }
 
 // Create the runtime by composing the FRAME pallets that were previously configured.
