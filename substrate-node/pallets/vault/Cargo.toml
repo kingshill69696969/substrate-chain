@@ -19,17 +19,17 @@ package = 'parity-scale-codec'
 version = '2.0.0'
 
 [dependencies]
-frame-support = { default-features = false, version = '3.0.0', git="https://github.com/paritytech/substrate" }
-frame-system = { default-features = false, version = '3.0.0', git="https://github.com/paritytech/substrate" }
-node-primitives = { version = "2.0.0", default-features = false, git="https://github.com/paritytech/substrate" }
-pallet-assets = { default-features = false, version = '3.0.0', git="https://github.com/paritytech/substrate" }
-sp-runtime = { default-features = false, version = '3.0.0', git="https://github.com/paritytech/substrate" }
-sp-std = { default-features = false, version = '3.0.0', git="https://github.com/paritytech/substrate" }
+frame-support = { default-features = false, version = '3.0.0', git="https://github.com/paritytech/substrate", branch = 'master'}
+frame-system = { default-features = false, version = '3.0.0', git="https://github.com/paritytech/substrate", branch = 'master'}
+node-primitives = { version = "2.0.0", default-features = false, git="https://github.com/paritytech/substrate", branch = 'master'}
+pallet-assets = { default-features = false, version = '3.0.0', git="https://github.com/paritytech/substrate", branch = 'master'}
+sp-runtime = { default-features = false, version = '3.0.0', git="https://github.com/paritytech/substrate", branch = 'master'}
+sp-std = { default-features = false, version = '3.0.0', git="https://github.com/paritytech/substrate", branch = 'master'}
 
 [dev-dependencies]
 serde = { version = "1.0.119" }
-sp-core = { default-features = false, version = '3.0.0', git="https://github.com/paritytech/substrate" }
-sp-io = { default-features = false, version = '3.0.0', git="https://github.com/paritytech/substrate" }
+sp-core = { default-features = false, version = '3.0.0', git="https://github.com/paritytech/substrate", branch = 'master'}
+sp-io = { default-features = false, version = '3.0.0', git="https://github.com/paritytech/substrate", branch = 'master'}
 
 [features]
 default = ['std']

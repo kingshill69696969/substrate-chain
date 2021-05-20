@@ -1,11 +1,12 @@
 #![cfg_attr(not(feature = "std"), no_std)]
+use sp_std::{fmt::Debug};
 use frame_support::{decl_error, decl_event, decl_module, decl_storage, ensure, traits::{Get, Currency}, Parameter, PalletId};
 use frame_system::{ensure_signed};
 use codec::{HasCompact};
 use sp_runtime::{
 	traits::{
 		Zero, AccountIdConversion, AtLeast32BitUnsigned, Member, StaticLookup, LookupError
-	}, MultiAddress,
+	}, MultiAddress
 };
 use frame_support::traits::tokens::fungibles::{Inspect, Mutate, Transfer};
 
@@ -14,6 +15,10 @@ type AssetId<T> = <<T as Config>::Currencies as Inspect<<T as frame_system::Conf
 
 pub trait Config: frame_system::Config {
     type Event: From<Event<Self>> + Into<<Self as frame_system::Config>::Event>;
+
+    // type Balance: Member + Parameter + AtLeast32BitUnsigned + Default + Copy;
+
+    // type AssetId: Member + Parameter + Default + Copy + HasCompact;
 
     /// The vault's module id, used for deriving its sovereign account ID.
     type PalletId: Get<PalletId>;
